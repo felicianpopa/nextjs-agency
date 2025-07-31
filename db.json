@@ -1,11 +1,23 @@
 {
-  "posts": [
-    { "id": "1", "title": "a title", "views": 100 },
-    { "id": "2", "title": "another title", "views": 200 }
+  "hotels": [
+    { "name": "Hilton", "rate": "5", "price": 100 },
+    { "name": "Marriott", "rate": "5", "price": 120 },
+    { "name": "Holiday Inn", "rate": "4", "price": 80 },
+    { "name": "Radisson Blu", "rate": "4", "price": 95 },
+    { "name": "Intercontinental", "rate": "5", "price": 150 },
+    { "name": "Sheraton", "rate": "4", "price": 110 },
+    { "name": "Best Western", "rate": "3", "price": 65 },
+    { "name": "Novotel", "rate": "4", "price": 85 }
   ],
-  "comments": [
-    { "id": "1", "text": "a comment about post 1", "postId": "1" },
-    { "id": "2", "text": "another comment about post 1", "postId": "1" }
+  "offers": [
+    { "id": "1", "name": "7 day stay + plane", "price": "500" },
+    { "id": "2", "name": "Weekend getaway package", "price": "250" },
+    { "id": "3", "name": "14 day luxury vacation", "price": "1200" },
+    { "id": "4", "name": "Business travel deal", "price": "300" },
+    { "id": "5", "name": "Family vacation special", "price": "800" },
+    { "id": "6", "name": "Romantic couple retreat", "price": "600" },
+    { "id": "7", "name": "Adventure tour package", "price": "950" },
+    { "id": "8", "name": "City break 3 nights", "price": "180" }
   ],
   "profile": {
     "name": "typicode"
