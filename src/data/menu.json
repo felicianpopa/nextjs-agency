@@ -6,5 +6,9 @@
   {
     "key": "offers",
     "path": "offers"
+  },
+  {
+    "key": "hotels",
+    "path": "hotels"
   }
 ]

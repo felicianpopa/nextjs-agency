@@ -1,11 +1,13 @@
 {
   "navigation": {
     "homepage": "Acasă",
-    "offers": "Oferte"
+    "offers": "Oferte",
+    "hotels": "Hoteluri"
   },
   "pages": {
     "homepage": "Acasă",
-    "offers": "Pagina de oferte"
+    "offers": "Pagina de oferte",
+    "hotels": "Pagina hoteluri"
   },
   "metadata": {
     "title": "Agenție",

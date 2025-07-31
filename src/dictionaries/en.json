@@ -1,11 +1,13 @@
 {
   "navigation": {
     "homepage": "Homepage",
-    "offers": "Offers"
+    "offers": "Offers",
+    "hotels": "Hotels"
   },
   "pages": {
     "homepage": "Homepage",
-    "offers": "Offers page"
+    "offers": "Offers page",
+    "hotels": "Hotels page"
   },
   "metadata": {
     "title": "Agency",

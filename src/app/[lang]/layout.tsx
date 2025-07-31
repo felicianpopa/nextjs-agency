@@ -41,6 +41,7 @@ export default async function RootLayout({
   params: Promise<{ lang: "en" | "ro" }>;
 }>) {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
 
   return (
     <html lang={lang}>
@@ -48,7 +49,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main>
-          <Header lang={lang} />
+          <Header lang={lang} dict={dict} />
           {children}
         </main>
       </body>

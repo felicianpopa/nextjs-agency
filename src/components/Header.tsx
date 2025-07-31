@@ -7,16 +7,20 @@ import menuConfig from "../data/menu.json";
 
 type Language = "en" | "ro";
 
-interface MenuTranslations {
-  navigation: {
-    homepage: string;
-    offers: string;
-  };
-}
-
 interface LanguageItem {
   name: string;
   value: Language;
+}
+
+interface HeaderProps {
+  lang: Language;
+  dict: {
+    navigation: {
+      homepage: string;
+      offers: string;
+      hotels: string;
+    };
+  };
 }
 
 const languageItems: LanguageItem[] = [
@@ -24,28 +28,12 @@ const languageItems: LanguageItem[] = [
   { name: "RO", value: "ro" },
 ];
 
-const translations: Record<Language, MenuTranslations> = {
-  en: {
-    navigation: {
-      homepage: "Homepage",
-      offers: "Offers",
-    },
-  },
-  ro: {
-    navigation: {
-      homepage: "Acasă",
-      offers: "Oferte",
-    },
-  },
-};
-
-export default function Header({ lang }: { lang: Language }) {
+export default function Header({ lang, dict }: HeaderProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem>(
     languageItems.find((item) => item.value === lang) || languageItems[0]
   );
   const pathname = usePathname();
-  const dict = translations[lang];
 
   useEffect(() => {
     setSelectedLanguage(
