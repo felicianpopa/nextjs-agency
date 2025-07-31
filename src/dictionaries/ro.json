@@ -1,0 +1,14 @@
+{
+  "navigation": {
+    "homepage": "Acasă",
+    "offers": "Oferte"
+  },
+  "pages": {
+    "homepage": "Acasă",
+    "offers": "Pagina de oferte"
+  },
+  "metadata": {
+    "title": "Agenție",
+    "description": "Generat de aplicația create next"
+  }
+}

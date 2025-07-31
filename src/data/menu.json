@@ -1,10 +1,10 @@
 [
   {
-    "name": "Homepage",
-    "url": "/"
+    "key": "homepage",
+    "path": ""
   },
   {
-    "name": "Offers",
-    "url": "/offers"
+    "key": "offers",
+    "path": "offers"
   }
 ]

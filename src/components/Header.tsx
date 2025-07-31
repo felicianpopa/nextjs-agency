@@ -1,22 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import menuItems from "../data/menu.json";
-import languageItems from "../data/languages.json";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import menuConfig from "../data/menu.json";
 
-export default function Header() {
+type Language = "en" | "ro";
+
+interface MenuTranslations {
+  navigation: {
+    homepage: string;
+    offers: string;
+  };
+}
+
+interface LanguageItem {
+  name: string;
+  value: Language;
+}
+
+const languageItems: LanguageItem[] = [
+  { name: "EN", value: "en" },
+  { name: "RO", value: "ro" },
+];
+
+const translations: Record<Language, MenuTranslations> = {
+  en: {
+    navigation: {
+      homepage: "Homepage",
+      offers: "Offers",
+    },
+  },
+  ro: {
+    navigation: {
+      homepage: "Acasă",
+      offers: "Oferte",
+    },
+  },
+};
+
+export default function Header({ lang }: { lang: Language }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(languageItems[0]);
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageItem>(
+    languageItems.find((item) => item.value === lang) || languageItems[0]
+  );
+  const pathname = usePathname();
+  const dict = translations[lang];
+
+  useEffect(() => {
+    setSelectedLanguage(
+      languageItems.find((item) => item.value === lang) || languageItems[0]
+    );
+  }, [lang]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const selectLanguage = (language: (typeof languageItems)[0]) => {
+  const selectLanguage = (language: LanguageItem) => {
     setSelectedLanguage(language);
     setIsDropdownOpen(false);
+
+    // Navigate to the new language
+    const currentPath = pathname.split("/").slice(2).join("/"); // Remove /[lang] part
+    const newPath = `/${language.value}${currentPath ? `/${currentPath}` : ""}`;
+    window.location.href = newPath;
   };
+
+  const menuItems = menuConfig.map((item) => ({
+    name: dict.navigation[item.key as keyof typeof dict.navigation],
+    url: `/${lang}${item.path ? `/${item.path}` : ""}`,
+  }));
 
   return (
     <header className="p-3 bg-blue-300">
