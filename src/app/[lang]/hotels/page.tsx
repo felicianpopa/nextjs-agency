@@ -20,7 +20,7 @@ export default async function Hotels({
 
   return (
     <div className="px-4">
-      <h1>{dict.pages.hotels}</h1>
+      <h1 className="text-primary">{dict.pages.hotels}</h1>
       <ul className="grid grid-cols-3 grid-rows-3 gap-4">
         {hotels.map((hotel: Hotel, index: number) => (
           <li key={index} className="p-2 mb-2 border-2 rounded-lg">

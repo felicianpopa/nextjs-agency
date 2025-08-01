@@ -61,7 +61,7 @@ export default function Header({ lang, dict }: HeaderProps) {
   }));
 
   return (
-    <header className="p-3 bg-blue-300">
+    <header className="p-3 bg-primary">
       <nav className="flex items-center justify-between">
         <ul className="flex space-x-4 text-black">
           {menuItems.map((item, index) => (
