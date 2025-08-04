@@ -58,7 +58,7 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
                 <div className="mb-3">
                   {hotel.image ? (
                     <Image
-                      src={`/${hotel.image.replace('public/', '')}`}
+                      src={`/${hotel.image.replace("public/", "")}`}
                       alt={hotel.name}
                       width={200}
                       height={150}
