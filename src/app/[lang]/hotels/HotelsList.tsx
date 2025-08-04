@@ -16,6 +16,12 @@ interface HotelsListProps {
     pages: {
       hotels: string;
     };
+    hotel: {
+      name: string;
+      rate: string;
+      price: string;
+      stars: string;
+    };
   };
   initialHotels: Hotel[];
 }
@@ -70,9 +76,15 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
                     </div>
                   )}
                 </div>
-                <p>Name: {hotel.name}</p>
-                <p>Rate: {hotel.rate} stars</p>
-                <p>Price: ${hotel.price}</p>
+                <p>
+                  {dict.hotel.name}: {hotel.name}
+                </p>
+                <p>
+                  {dict.hotel.rate}: {hotel.rate} {dict.hotel.stars}
+                </p>
+                <p>
+                  {dict.hotel.price}: ${hotel.price}
+                </p>
               </li>
             ))}
           </ul>

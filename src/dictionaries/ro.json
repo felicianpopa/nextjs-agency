@@ -9,6 +9,12 @@
     "offers": "Pagina de oferte",
     "hotels": "Pagina hoteluri"
   },
+  "hotel": {
+    "name": "Nume",
+    "rate": "Rating",
+    "price": "Preț",
+    "stars": "stele"
+  },
   "metadata": {
     "title": "Agenție",
     "description": "Generat de aplicația create next"
