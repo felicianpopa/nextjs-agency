@@ -1,12 +1,12 @@
 import { getDictionary } from "@/dictionaries/dictionaries";
 import { fetchData } from "@/api/fetchData";
 
-// Define the Hotel type based on the API response
-interface Hotel {
-  name: string;
-  rate: string;
-  price: number;
-}
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import HotelsList from "./HotelsList";
 
 export default async function Hotels({
   params,
@@ -16,23 +16,17 @@ export default async function Hotels({
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  const data = await fetchData(
-    "http://localhost:5000/hotels?_start=0&_limit=5"
-  );
-  const hotels: Hotel[] = await data;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["hotels"],
+    queryFn: () => fetchData("http://localhost:5000/hotels?_start=0&_limit=5"),
+  });
 
   return (
-    <div className="px-4">
-      <h1 className="text-primary">{dict.pages.hotels}</h1>
-      <ul className="grid grid-cols-3 grid-rows-3 gap-4">
-        {hotels.map((hotel: Hotel, index: number) => (
-          <li key={index} className="p-2 mb-2 border-2 rounded-lg">
-            <p>Name: {hotel.name}</p>
-            <p>Rate: {hotel.rate} stars</p>
-            <p>Price: ${hotel.price}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    // Neat! Serialization is now as easy as passing props.
+    // HydrationBoundary is a Client Component, so hydration will happen there.
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <HotelsList dict={dict} />
+    </HydrationBoundary>
   );
 }
