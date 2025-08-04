@@ -2,11 +2,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/api/fetchData";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Hotel {
   name: string;
   rate: string;
   price: number;
+  image?: string;
 }
 
 interface HotelsListProps {
@@ -53,6 +55,21 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
           <ul className="grid grid-cols-3 grid-rows-3 gap-4">
             {allHotels.map((hotel: Hotel, index: number) => (
               <li key={index} className="p-2 mb-2 border-2 rounded-lg">
+                <div className="mb-3">
+                  {hotel.image ? (
+                    <Image
+                      src={`/${hotel.image.replace('public/', '')}`}
+                      alt={hotel.name}
+                      width={200}
+                      height={150}
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                  ) : (
+                    <div className="w-full h-32 bg-gray-200 rounded-md flex items-center justify-center">
+                      <span className="text-gray-500">No image available</span>
+                    </div>
+                  )}
+                </div>
                 <p>Name: {hotel.name}</p>
                 <p>Rate: {hotel.rate} stars</p>
                 <p>Price: ${hotel.price}</p>
