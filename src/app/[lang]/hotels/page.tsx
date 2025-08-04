@@ -1,5 +1,6 @@
 import { getDictionary } from "@/dictionaries/dictionaries";
 import { fetchData } from "@/api/fetchData";
+import { mainConfigurations } from "@/branding/configurations";
 
 import {
   dehydrate,
@@ -18,13 +19,16 @@ export default async function Hotels({
 
   // Fetch initial 5 hotels on the server for SSR
   const initialHotels = await fetchData(
-    "http://localhost:5000/hotels?_start=0&_limit=5"
+    `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`
   );
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["hotels", 5],
-    queryFn: () => fetchData("http://localhost:5000/hotels?_start=0&_limit=5"),
+    queryKey: ["hotels", mainConfigurations.hotelsPerPage],
+    queryFn: () =>
+      fetchData(
+        `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`
+      ),
   });
 
   return (

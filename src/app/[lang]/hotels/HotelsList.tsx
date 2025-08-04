@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/api/fetchData";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { mainConfigurations } from "@/branding/configurations";
 
 interface Hotel {
   name: string;
@@ -27,7 +28,7 @@ interface HotelsListProps {
 }
 
 export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(mainConfigurations.hotelsPerPage);
   const [allHotels, setAllHotels] = useState<Hotel[]>(initialHotels);
 
   const {
@@ -42,13 +43,13 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
 
   // Update allHotels when we get additional data
   useEffect(() => {
-    if (additionalHotels && limit > 5) {
+    if (additionalHotels && limit > mainConfigurations.hotelsPerPage) {
       setAllHotels(additionalHotels);
     }
   }, [additionalHotels, limit]);
 
   const loadMoreHotels = () => {
-    setLimit((prevLimit) => prevLimit + 5);
+    setLimit((prevLimit) => prevLimit + mainConfigurations.hotelsPerPage);
   };
 
   return (
@@ -95,7 +96,9 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
               disabled={isLoading}
               className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Loading..." : "Load 5 More Hotels"}
+              {isLoading
+                ? "Loading ..."
+                : `Load ${mainConfigurations.hotelsPerPage} More Hotels`}
             </button>
           </div>
         </>
