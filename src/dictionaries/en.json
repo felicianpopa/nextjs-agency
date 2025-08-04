@@ -9,11 +9,17 @@
     "offers": "Offers page",
     "hotels": "Hotels page"
   },
-  "hotel": {
+  "general": {
+    "loading": "Loading",
+    "load": "Load",
     "name": "Name",
     "rate": "Rate",
     "price": "Price",
     "stars": "stars"
+  },
+  "hotel": {
+    "moreHotels": "More Hotels",
+    "loadMoreHotels": "Load {{count}} More Hotels"
   },
   "metadata": {
     "title": "Agency",

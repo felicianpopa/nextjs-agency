@@ -4,6 +4,7 @@ import { fetchData } from "@/api/fetchData";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { mainConfigurations } from "@/branding/configurations";
+import { HotelsPageDict } from "@/dictionaries/dictionaries";
 
 interface Hotel {
   name: string;
@@ -13,17 +14,7 @@ interface Hotel {
 }
 
 interface HotelsListProps {
-  dict: {
-    pages: {
-      hotels: string;
-    };
-    hotel: {
-      name: string;
-      rate: string;
-      price: string;
-      stars: string;
-    };
-  };
+  dict: HotelsPageDict;
   initialHotels: Hotel[];
 }
 
@@ -78,18 +69,18 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
                   )}
                 </div>
                 <p>
-                  {dict.hotel.name}: {hotel.name}
+                  {dict.general.name}: {hotel.name}
                 </p>
                 <p>
-                  {dict.hotel.rate}: {hotel.rate} {dict.hotel.stars}
+                  {dict.general.rate}: {hotel.rate} {dict.general.stars}
                 </p>
                 <p>
-                  {dict.hotel.price}: ${hotel.price}
+                  {dict.general.price}: ${hotel.price}
                 </p>
               </li>
             ))}
           </ul>
-          {isLoading && <p>Loading hotels...</p>}
+          {isLoading && <p>{dict.general.loading}...</p>}
           <div className="mt-6 text-center">
             <button
               onClick={loadMoreHotels}
@@ -97,8 +88,8 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
               className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading
-                ? "Loading ..."
-                : `Load ${mainConfigurations.hotelsPerPage} More Hotels`}
+                ? `${dict.general.loading}...`
+                : dict.hotel.loadMoreHotels.replace('{{count}}', mainConfigurations.hotelsPerPage.toString())}
             </button>
           </div>
         </>

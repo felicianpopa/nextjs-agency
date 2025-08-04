@@ -9,11 +9,17 @@
     "offers": "Pagina de oferte",
     "hotels": "Pagina hoteluri"
   },
-  "hotel": {
+  "general": {
+    "loading": "Se încarcă",
+    "load": "Încarcă",
     "name": "Nume",
     "rate": "Rating",
     "price": "Preț",
     "stars": "stele"
+  },
+  "hotel": {
+    "moreHotels": "Mai multe hoteluri",
+    "loadMoreHotels": "Încarcă {{count}} hoteluri în plus"
   },
   "metadata": {
     "title": "Agenție",
