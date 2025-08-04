@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/api/fetchData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Hotel {
   name: string;
@@ -15,13 +15,15 @@ interface HotelsListProps {
       hotels: string;
     };
   };
+  initialHotels: Hotel[];
 }
 
-export default function HotelsList({ dict }: HotelsListProps) {
+export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
   const [limit, setLimit] = useState(5);
+  const [allHotels, setAllHotels] = useState<Hotel[]>(initialHotels);
 
   const {
-    data: hotels,
+    data: additionalHotels,
     isLoading,
     error,
   } = useQuery({
@@ -30,6 +32,13 @@ export default function HotelsList({ dict }: HotelsListProps) {
       fetchData(`http://localhost:5000/hotels?_start=0&_limit=${limit}`),
   });
 
+  // Update allHotels when we get additional data
+  useEffect(() => {
+    if (additionalHotels && limit > 5) {
+      setAllHotels(additionalHotels);
+    }
+  }, [additionalHotels, limit]);
+
   const loadMoreHotels = () => {
     setLimit((prevLimit) => prevLimit + 5);
   };
@@ -37,12 +46,12 @@ export default function HotelsList({ dict }: HotelsListProps) {
   return (
     <div className="px-4">
       <h1 className="text-primary">{dict.pages.hotels}</h1>
-      {isLoading && <p>Loading hotels...</p>}
       {error && <p>Error loading hotels: {error.message}</p>}
-      {hotels && (
+
+      {allHotels && (
         <>
           <ul className="grid grid-cols-3 grid-rows-3 gap-4">
-            {hotels.map((hotel: Hotel, index: number) => (
+            {allHotels.map((hotel: Hotel, index: number) => (
               <li key={index} className="p-2 mb-2 border-2 rounded-lg">
                 <p>Name: {hotel.name}</p>
                 <p>Rate: {hotel.rate} stars</p>
@@ -50,6 +59,7 @@ export default function HotelsList({ dict }: HotelsListProps) {
               </li>
             ))}
           </ul>
+          {isLoading && <p>Loading hotels...</p>}
           <div className="mt-6 text-center">
             <button
               onClick={loadMoreHotels}
