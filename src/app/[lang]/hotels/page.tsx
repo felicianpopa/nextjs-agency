@@ -16,7 +16,9 @@ export default async function Hotels({
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  const data = await fetchData("http://localhost:5000/hotels");
+  const data = await fetchData(
+    "http://localhost:5000/hotels?_start=0&_limit=5"
+  );
   const hotels: Hotel[] = await data;
 
   return (
