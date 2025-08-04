@@ -1,4 +1,5 @@
 import { getDictionary } from "@/dictionaries/dictionaries";
+import { fetchData } from "@/api/fetchData";
 
 // Define the Hotel type based on the API response
 interface Hotel {
@@ -15,8 +16,8 @@ export default async function Hotels({
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  const data = await fetch("http://localhost:5000/hotels");
-  const hotels: Hotel[] = await data.json();
+  const data = await fetchData("http://localhost:5000/hotels");
+  const hotels: Hotel[] = await data;
 
   return (
     <div className="px-4">
