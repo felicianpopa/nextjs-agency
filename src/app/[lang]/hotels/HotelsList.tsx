@@ -2,10 +2,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/api/fetchData";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { mainConfigurations } from "@/branding/configurations";
 import { HotelsPageDict } from "@/dictionaries/dictionaries";
 import { HotelsMapper, MappedHotel } from "@/data/HotelsMapper";
+import CardComponent from "@/components/CardComponent";
 
 interface HotelsListProps {
   dict: HotelsPageDict;
@@ -52,36 +52,13 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
                   ?.value as string) || "Hotel";
 
               return (
-                <li key={index} className="p-2 mb-2 border-2 rounded-lg">
-                  <div className="mb-3">
-                    {hotel.image ? (
-                      <Image
-                        src={`/${hotel.image.replace("public/", "")}`}
-                        alt={hotelName}
-                        width={200}
-                        height={150}
-                        className="w-full h-32 object-cover rounded-md"
-                      />
-                    ) : (
-                      <div className="w-full h-32 bg-gray-200 rounded-md flex items-center justify-center">
-                        <span className="text-gray-500">
-                          No image available
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Loop through details array */}
-                  {hotel.details.map((detail, detailIndex) => {
-                    return (
-                      <p key={detailIndex}>
-                        {(dict.general as Record<string, string>)[
-                          detail.label
-                        ] || detail.label}
-                        : {detail.value}
-                      </p>
-                    );
-                  })}
+                <li key={index}>
+                  <CardComponent
+                    image={hotel.image}
+                    details={hotel.details}
+                    dictionary={dict.general as Record<string, string>}
+                    altText={hotelName}
+                  />
                 </li>
               );
             })}
