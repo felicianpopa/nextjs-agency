@@ -2,12 +2,14 @@
   "navigation": {
     "homepage": "Homepage",
     "offers": "Offers",
-    "hotels": "Hotels"
+    "hotels": "Hotels",
+    "profile": "Profile"
   },
   "pages": {
     "homepage": "Homepage",
     "offers": "Offers page",
-    "hotels": "Hotels page"
+    "hotels": "Hotels page",
+    "profile": "Profile page"
   },
   "general": {
     "loading": "Loading",

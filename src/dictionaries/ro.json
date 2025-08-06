@@ -2,12 +2,14 @@
   "navigation": {
     "homepage": "Acasă",
     "offers": "Oferte",
-    "hotels": "Hoteluri"
+    "hotels": "Hoteluri",
+    "profile": "Profil"
   },
   "pages": {
     "homepage": "Acasă",
     "offers": "Pagina de oferte",
-    "hotels": "Pagina hoteluri"
+    "hotels": "Pagina hoteluri",
+    "profile": "Pagina de profil"
   },
   "general": {
     "loading": "Se încarcă",

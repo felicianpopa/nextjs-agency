@@ -6,11 +6,13 @@ export interface Dictionary {
     homepage: string;
     offers: string;
     hotels: string;
+    profile: string;
   };
   pages: {
     homepage: string;
     offers: string;
     hotels: string;
+    profile: string;
   };
   general: {
     loading: string;

@@ -10,5 +10,10 @@
   {
     "key": "hotels",
     "path": "hotels"
+  },
+  {
+    "key": "profile",
+    "path": "profile",
+    "needsAuth": "true"
   }
 ]

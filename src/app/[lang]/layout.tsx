@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getDictionary } from "@/dictionaries/dictionaries";
 import Providers from "../providers";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 import Header from "@/components/Header";
 import "../globals.css";
@@ -49,12 +57,14 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <main>
-            <Header lang={lang} dict={dict} />
-            {children}
-          </main>
-        </Providers>
+        <ClerkProvider>
+          <Providers>
+            <main>
+              <Header lang={lang} dict={dict} />
+              {children}
+            </main>
+          </Providers>
+        </ClerkProvider>
       </body>
     </html>
   );

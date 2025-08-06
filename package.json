@@ -10,6 +10,7 @@
     "start-db": "npx json-server db.json --port 5000"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.28.1",
     "@tanstack/react-query": "^5.84.1",
     "json-server": "^1.0.0-beta.3",
     "next": "15.4.5",
