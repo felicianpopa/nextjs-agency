@@ -1,6 +1,7 @@
 import { getDictionary } from "@/dictionaries/dictionaries";
 import { fetchData } from "@/api/fetchData";
 import { mainConfigurations } from "@/branding/configurations";
+import { HotelsMapper } from "@/data/HotelsMapper";
 
 import {
   dehydrate,
@@ -18,9 +19,11 @@ export default async function Hotels({
   const dict = await getDictionary(lang);
 
   // Fetch initial 5 hotels on the server for SSR
-  const initialHotels = await fetchData(
+  const rawInitialHotels = await fetchData(
     `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`
   );
+
+  const initialHotels = HotelsMapper.mapArray(rawInitialHotels);
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({

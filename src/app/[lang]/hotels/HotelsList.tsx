@@ -5,22 +5,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { mainConfigurations } from "@/branding/configurations";
 import { HotelsPageDict } from "@/dictionaries/dictionaries";
-
-interface Hotel {
-  name: string;
-  rate: string;
-  price: number;
-  image?: string;
-}
+import { HotelsMapper, MappedHotel } from "@/data/HotelsMapper";
 
 interface HotelsListProps {
   dict: HotelsPageDict;
-  initialHotels: Hotel[];
+  initialHotels: MappedHotel[];
 }
 
 export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
   const [limit, setLimit] = useState(mainConfigurations.hotelsPerPage);
-  const [allHotels, setAllHotels] = useState<Hotel[]>(initialHotels);
+  const [allHotels, setAllHotels] = useState<MappedHotel[]>(initialHotels);
 
   const {
     data: additionalHotels,
@@ -32,10 +26,11 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
       fetchData(`http://localhost:5000/hotels?_start=0&_limit=${limit}`),
   });
 
-  // Update allHotels when we get additional data
+  // Update allHotels when we get additional data using HotelsMapper
   useEffect(() => {
     if (additionalHotels && limit > mainConfigurations.hotelsPerPage) {
-      setAllHotels(additionalHotels);
+      const mappedHotels = HotelsMapper.mapArray(additionalHotels);
+      setAllHotels(mappedHotels);
     }
   }, [additionalHotels, limit]);
 
@@ -51,34 +46,45 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
       {allHotels && (
         <>
           <ul className="grid grid-cols-3 grid-rows-3 gap-4">
-            {allHotels.map((hotel: Hotel, index: number) => (
-              <li key={index} className="p-2 mb-2 border-2 rounded-lg">
-                <div className="mb-3">
-                  {hotel.image ? (
-                    <Image
-                      src={`/${hotel.image.replace("public/", "")}`}
-                      alt={hotel.name}
-                      width={200}
-                      height={150}
-                      className="w-full h-32 object-cover rounded-md"
-                    />
-                  ) : (
-                    <div className="w-full h-32 bg-gray-200 rounded-md flex items-center justify-center">
-                      <span className="text-gray-500">No image available</span>
-                    </div>
-                  )}
-                </div>
-                <p>
-                  {dict.general.name}: {hotel.name}
-                </p>
-                <p>
-                  {dict.general.rate}: {hotel.rate} {dict.general.stars}
-                </p>
-                <p>
-                  {dict.general.price}: ${hotel.price}
-                </p>
-              </li>
-            ))}
+            {allHotels.map((hotel: MappedHotel, index: number) => {
+              const hotelName =
+                (hotel.details.find((d) => d.label === "name")
+                  ?.value as string) || "Hotel";
+
+              return (
+                <li key={index} className="p-2 mb-2 border-2 rounded-lg">
+                  <div className="mb-3">
+                    {hotel.image ? (
+                      <Image
+                        src={`/${hotel.image.replace("public/", "")}`}
+                        alt={hotelName}
+                        width={200}
+                        height={150}
+                        className="w-full h-32 object-cover rounded-md"
+                      />
+                    ) : (
+                      <div className="w-full h-32 bg-gray-200 rounded-md flex items-center justify-center">
+                        <span className="text-gray-500">
+                          No image available
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Loop through details array */}
+                  {hotel.details.map((detail, detailIndex) => {
+                    return (
+                      <p key={detailIndex}>
+                        {(dict.general as Record<string, string>)[
+                          detail.label
+                        ] || detail.label}
+                        : {detail.value}
+                      </p>
+                    );
+                  })}
+                </li>
+              );
+            })}
           </ul>
           {isLoading && <p>{dict.general.loading}...</p>}
           <div className="mt-6 text-center">
@@ -89,7 +95,10 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
             >
               {isLoading
                 ? `${dict.general.loading}...`
-                : dict.hotel.loadMoreHotels.replace('{{count}}', mainConfigurations.hotelsPerPage.toString())}
+                : dict.hotel.loadMoreHotels.replace(
+                    "{{count}}",
+                    mainConfigurations.hotelsPerPage.toString()
+                  )}
             </button>
           </div>
         </>
