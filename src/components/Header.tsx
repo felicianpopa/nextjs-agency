@@ -82,9 +82,13 @@ export default function Header({ lang, dict }: HeaderProps) {
   });
 
   const menuItems = filteredMenuConfig.map((item) => ({
-    name: dict.navigation[item.key as keyof typeof dict.navigation],
+    name:
+      dict.navigation[item.key as keyof typeof dict.navigation] ||
+      item.key.charAt(0).toUpperCase() + item.key.slice(1),
     url: `/${lang}${item.path ? `/${item.path}` : ""}`,
   }));
+
+  console.warn(menuItems);
 
   return (
     <header className="p-3 bg-primary">
