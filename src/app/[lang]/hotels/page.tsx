@@ -2,6 +2,7 @@ import { getDictionary } from "@/dictionaries/dictionaries";
 import { fetchData } from "@/api/fetchData";
 import { mainConfigurations } from "@/branding/configurations";
 import { HotelsMapper } from "@/data/HotelsMapper";
+import { Metadata } from "next";
 
 import {
   dehydrate,
@@ -9,6 +10,20 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import HotelsList from "./HotelsList";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "ro" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  return {
+    title: dict.pages.hotels,
+    description: dict.metadata.description,
+  };
+}
 
 export default async function Hotels({
   params,
