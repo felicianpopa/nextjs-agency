@@ -2,16 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getDictionary } from "@/dictionaries/dictionaries";
 import Providers from "../providers";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import Header from "@/components/Header";
+import NavigationLoader from "@/components/NavigationLoader";
+import { NavigationProvider } from "@/components/NavigationContext";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -59,10 +54,13 @@ export default async function RootLayout({
       >
         <ClerkProvider>
           <Providers>
-            <main>
-              <Header lang={lang} dict={dict} />
-              {children}
-            </main>
+            <NavigationProvider>
+              <NavigationLoader />
+              <main>
+                <Header lang={lang} dict={dict} />
+                {children}
+              </main>
+            </NavigationProvider>
           </Providers>
         </ClerkProvider>
       </body>

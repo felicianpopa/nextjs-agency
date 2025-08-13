@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import menuConfig from "../data/menu.json";
+import NavigationLink from "./NavigationLink";
 import {
   SignInButton,
   SignUpButton,
@@ -96,7 +96,7 @@ export default function Header({ lang, dict }: HeaderProps) {
         <ul className="flex space-x-4 text-black">
           {menuItems.map((item, index) => (
             <li key={index}>
-              <Link href={item.url}>{item.name}</Link>
+              <NavigationLink href={item.url}>{item.name}</NavigationLink>
             </li>
           ))}
         </ul>
