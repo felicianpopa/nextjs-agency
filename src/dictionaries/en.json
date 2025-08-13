@@ -6,10 +6,22 @@
     "profile": "Profile"
   },
   "pages": {
-    "homepage": "Homepage",
-    "offers": "Offers page",
-    "hotels": "Hotels page",
-    "profile": "Profile page"
+    "homepage": {
+      "title": "Homepage",
+      "description": "Welcome to our travel agency. Discover amazing hotels and exclusive offers for your perfect vacation."
+    },
+    "offers": {
+      "title": "Special Offers",
+      "description": "Browse through our curated selection of special offers and deals for unforgettable travel experiences."
+    },
+    "hotels": {
+      "title": "Hotels",
+      "description": "Explore our extensive collection of hotels worldwide. Find the perfect accommodation for your next trip."
+    },
+    "profile": {
+      "title": "My Profile",
+      "description": "Manage your account settings, view your booking history, and update your personal information."
+    }
   },
   "general": {
     "loading": "Loading",

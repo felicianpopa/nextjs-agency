@@ -40,7 +40,7 @@ export default function OffersList({ dict, initialOffers }: OffersListProps) {
 
   return (
     <div className="px-4">
-      <h1 className="text-primary">{dict.pages.offers}</h1>
+      <h1 className="text-primary">{dict.pages.offers.title}</h1>
       {error && <p>Error loading offers: {error.message}</p>}
 
       {allOffers && (

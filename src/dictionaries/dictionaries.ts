@@ -9,10 +9,22 @@ export interface Dictionary {
     profile: string;
   };
   pages: {
-    homepage: string;
-    offers: string;
-    hotels: string;
-    profile: string;
+    homepage: {
+      title: string;
+      description: string;
+    };
+    offers: {
+      title: string;
+      description: string;
+    };
+    hotels: {
+      title: string;
+      description: string;
+    };
+    profile: {
+      title: string;
+      description: string;
+    };
   };
   general: {
     loading: string;

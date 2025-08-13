@@ -6,10 +6,22 @@
     "profile": "Profil"
   },
   "pages": {
-    "homepage": "Acasă",
-    "offers": "Pagina de oferte",
-    "hotels": "Pagina hoteluri",
-    "profile": "Pagina de profil"
+    "homepage": {
+      "title": "Acasă",
+      "description": "Bun venit la agenția noastră de turism. Descoperă hoteluri minunate și oferte exclusive pentru vacanța ta perfectă."
+    },
+    "offers": {
+      "title": "Oferte Speciale",
+      "description": "Răsfoiește selecția noastră de oferte speciale și reduceri pentru experiențe de călătorie de neuitat."
+    },
+    "hotels": {
+      "title": "Hoteluri",
+      "description": "Explorează colecția noastră extinsă de hoteluri din întreaga lume. Găsește cazarea perfectă pentru următoarea ta călătorie."
+    },
+    "profile": {
+      "title": "Profilul Meu",
+      "description": "Gestionează setările contului, vizualizează istoricul rezervărilor și actualizează informațiile personale."
+    }
   },
   "general": {
     "loading": "Se încarcă",

@@ -65,7 +65,7 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
 
   return (
     <div className="px-4">
-      <h1 className="text-primary">{dict.pages.hotels}</h1>
+      <h1 className="text-primary">{dict.pages.hotels.title}</h1>
 
       <div className="mb-4">
         Filter by rating

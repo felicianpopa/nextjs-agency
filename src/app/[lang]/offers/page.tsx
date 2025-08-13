@@ -20,8 +20,8 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
 
   return {
-    title: dict.pages.offers,
-    description: dict.metadata.description,
+    title: dict.pages.offers.title,
+    description: dict.pages.offers.description,
   };
 }
 
