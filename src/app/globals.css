@@ -1,11 +1,5 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-primary: lab(48.85% 0.17 -43.72);
-  --color-secondary: #1f1d1d;
-}
+@import "./../branding/branding.css";
 
 @theme inline {
   --color-primary: var(--color-primary);
