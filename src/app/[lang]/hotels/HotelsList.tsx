@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchData } from "@/api/fetchData";
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { mainConfigurations } from "@/branding/configurations";
 import { HotelsPageDict } from "@/dictionaries/dictionaries";
 import { HotelsMapper, MappedHotel } from "@/data/HotelsMapper";
@@ -13,34 +14,75 @@ interface HotelsListProps {
 }
 
 export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [limit, setLimit] = useState(mainConfigurations.hotelsPerPage);
   const [allHotels, setAllHotels] = useState<MappedHotel[]>(initialHotels);
+
+  const selectedRate = searchParams.get("rate") || "";
 
   const {
     data: additionalHotels,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["hotels", limit],
-    queryFn: () =>
-      fetchData(`http://localhost:5000/hotels?_start=0&_limit=${limit}`),
+    queryKey: ["hotels", limit, selectedRate],
+    queryFn: () => {
+      let url = `http://localhost:5000/hotels?_start=0&_limit=${limit}`;
+      if (selectedRate) {
+        url += `&rate=${selectedRate}`;
+      }
+      return fetchData(url);
+    },
   });
 
   // Update allHotels when we get additional data using HotelsMapper
   useEffect(() => {
-    if (additionalHotels && limit > mainConfigurations.hotelsPerPage) {
+    if (additionalHotels) {
       const mappedHotels = HotelsMapper.mapArray(additionalHotels);
       setAllHotels(mappedHotels);
     }
-  }, [additionalHotels, limit]);
+  }, [additionalHotels]);
+
+  // Reset limit when filter changes
+  useEffect(() => {
+    setLimit(mainConfigurations.hotelsPerPage);
+  }, [selectedRate]);
 
   const loadMoreHotels = () => {
     setLimit((prevLimit) => prevLimit + mainConfigurations.hotelsPerPage);
   };
 
+  const handleStarFilter = (rate: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (rate) {
+      params.set("rate", rate);
+    } else {
+      params.delete("rate");
+    }
+    router.push(`?${params.toString()}`);
+  };
+
   return (
     <div className="px-4">
       <h1 className="text-primary">{dict.pages.hotels}</h1>
+
+      <div className="mb-4">
+        Filter by rating
+        <select
+          onChange={(e) => handleStarFilter(e.target.value)}
+          value={selectedRate}
+          className="ml-3.5 px-3 py-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">All Ratings</option>
+          <option value="1">1 </option>
+          <option value="2">2 </option>
+          <option value="3">3 </option>
+          <option value="4">4 </option>
+          <option value="5">5 </option>
+        </select>
+      </div>
+
       {error && <p>Error loading hotels: {error.message}</p>}
 
       {allHotels && (

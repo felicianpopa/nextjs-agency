@@ -27,26 +27,33 @@ export async function generateMetadata({
 
 export default async function Hotels({
   params,
+  searchParams,
 }: {
   params: Promise<{ lang: "en" | "ro" }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { lang } = await params;
+  const resolvedSearchParams = await searchParams;
   const dict = await getDictionary(lang);
 
-  // Fetch initial 5 hotels on the server for SSR
-  const rawInitialHotels = await fetchData(
-    `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`
-  );
+  // Get the rate filter from URL parameters
+  const selectedRate = (resolvedSearchParams.rate as string) || "";
+
+  // Build the initial fetch URL based on URL parameters
+  let initialUrl = `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`;
+  if (selectedRate) {
+    initialUrl += `&rate=${selectedRate}`;
+  }
+
+  // Fetch initial hotels on the server for SSR (respecting URL parameters)
+  const rawInitialHotels = await fetchData(initialUrl);
 
   const initialHotels = HotelsMapper.mapArray(rawInitialHotels);
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["hotels", mainConfigurations.hotelsPerPage],
-    queryFn: () =>
-      fetchData(
-        `http://localhost:5000/hotels?_start=0&_limit=${mainConfigurations.hotelsPerPage}`
-      ),
+    queryKey: ["hotels", mainConfigurations.hotelsPerPage, selectedRate],
+    queryFn: () => fetchData(initialUrl),
   });
 
   return (
