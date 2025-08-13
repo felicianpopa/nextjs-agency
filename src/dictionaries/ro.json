@@ -17,11 +17,16 @@
     "name": "Nume",
     "rate": "Rating",
     "price": "Preț",
-    "stars": "stele"
+    "stars": "stele",
+    "id": "ID"
   },
   "hotel": {
     "moreHotels": "Mai multe hoteluri",
     "loadMoreHotels": "Încarcă {{count}} hoteluri în plus"
+  },
+  "offer": {
+    "moreOffers": "Mai multe oferte",
+    "loadMoreOffers": "Încarcă {{count}} oferte în plus"
   },
   "metadata": {
     "title": "Agenție",

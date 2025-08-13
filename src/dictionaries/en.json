@@ -17,11 +17,16 @@
     "name": "Name",
     "rate": "Rate",
     "price": "Price",
-    "stars": "stars"
+    "stars": "stars",
+    "id": "ID"
   },
   "hotel": {
     "moreHotels": "More Hotels",
     "loadMoreHotels": "Load {{count}} More Hotels"
+  },
+  "offer": {
+    "moreOffers": "More Offers",
+    "loadMoreOffers": "Load {{count}} More Offers"
   },
   "metadata": {
     "title": "Agency",

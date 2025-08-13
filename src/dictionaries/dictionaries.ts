@@ -21,10 +21,15 @@ export interface Dictionary {
     rate: string;
     price: string;
     stars: string;
+    id: string;
   };
   hotel: {
     moreHotels: string;
     loadMoreHotels: string;
+  };
+  offer: {
+    moreOffers: string;
+    loadMoreOffers: string;
   };
   metadata: {
     title: string;
@@ -36,11 +41,13 @@ export interface Dictionary {
 export type GeneralDict = Pick<Dictionary, "general">;
 export type PagesDict = Pick<Dictionary, "pages">;
 export type HotelDict = Pick<Dictionary, "hotel">;
+export type OfferDict = Pick<Dictionary, "offer">;
 export type NavigationDict = Pick<Dictionary, "navigation">;
 
 // Combined common dictionaries
 export type CommonDict = Pick<Dictionary, "pages" | "general">;
 export type HotelsPageDict = Pick<Dictionary, "pages" | "general" | "hotel">;
+export type OffersPageDict = Pick<Dictionary, "pages" | "general" | "offer">;
 
 const dictionaries = {
   en: () => import("./en.json").then((module) => module.default),
