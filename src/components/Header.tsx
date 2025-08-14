@@ -88,8 +88,6 @@ export default function Header({ lang, dict }: HeaderProps) {
     url: `/${lang}${item.path ? `/${item.path}` : ""}`,
   }));
 
-  console.warn(menuItems);
-
   return (
     <header className="p-3 bg-primary">
       <nav className="flex items-center justify-between">
