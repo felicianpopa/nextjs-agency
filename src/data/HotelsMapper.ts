@@ -3,6 +3,7 @@ interface RawHotelData {
   rate: string;
   price: number;
   image?: string;
+  id: number;
 }
 
 export interface MappedHotel {
@@ -11,6 +12,7 @@ export interface MappedHotel {
     label: string;
     value: string | number;
   }>;
+  productId: number;
 }
 
 export class HotelsMapper {
@@ -19,6 +21,7 @@ export class HotelsMapper {
     label: string;
     value: string | number;
   }>;
+  productId: number;
 
   constructor(response: RawHotelData) {
     this.image = response.image;
@@ -37,6 +40,8 @@ export class HotelsMapper {
         value: response.rate,
       },
     ];
+
+    this.productId = response.id;
   }
 
   static map(data: RawHotelData): MappedHotel {
@@ -44,6 +49,7 @@ export class HotelsMapper {
     return {
       image: mapper.image,
       details: mapper.details,
+      productId: mapper.productId,
     };
   }
 

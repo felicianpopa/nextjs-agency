@@ -7,6 +7,7 @@ import { mainConfigurations } from "@/branding/configurations";
 import { HotelsPageDict } from "@/dictionaries/dictionaries";
 import { HotelsMapper, MappedHotel } from "@/data/HotelsMapper";
 import CardComponent from "@/components/CardComponent";
+import FavButton from "@/components/FavButton";
 
 interface HotelsListProps {
   dict: HotelsPageDict;
@@ -100,6 +101,7 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
                     details={hotel.details}
                     dictionary={dict.general as Record<string, string>}
                     altText={hotelName}
+                    footerSlot={<FavButton productId={hotel.productId} />}
                   />
                 </li>
               );

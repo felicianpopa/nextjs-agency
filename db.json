@@ -1,68 +1,77 @@
 {
   "hotels": [
     {
+      "id": "1",
       "name": "Hilton",
       "rate": "5",
       "price": 100,
       "image": "/images/hotels/1.jpeg"
     },
     {
+      "id": "2",
       "name": "Marriott",
       "rate": "5",
       "price": 120,
       "image": "/images/hotels/2.jpeg"
     },
     {
+      "id": "3",
       "name": "Holiday Inn",
       "rate": "4",
       "price": 80,
       "image": "/images/hotels/3.jpeg"
     },
     {
+      "id": "4",
       "name": "Radisson Blu",
       "rate": "4",
       "price": 95,
       "image": "/images/hotels/4.jpeg"
     },
     {
+      "id": "5",
       "name": "Intercontinental",
       "rate": "5",
       "price": 150,
       "image": "/images/hotels/5.jpeg"
     },
     {
+      "id": "6",
       "name": "Sheraton",
       "rate": "4",
       "price": 110,
       "image": "/images/hotels/6.jpeg"
     },
     {
+      "id": "7",
       "name": "Best Western",
       "rate": "3",
       "price": 65,
       "image": "/images/hotels/7.jpeg"
     },
     {
+      "id": "8",
       "name": "Novotel",
       "rate": "4",
       "price": 85,
       "image": "/images/hotels/8.jpeg"
     },
     {
+      "id": "9",
       "name": "Hyatt Regency",
       "rate": "5",
       "price": 140,
       "image": "/images/hotels/9.jpeg"
     },
-    { "name": "Four Seasons", "rate": "5", "price": 200 },
-    { "name": "Westin", "rate": "4", "price": 130 },
-    { "name": "DoubleTree", "rate": "4", "price": 90 },
-    { "name": "Embassy Suites", "rate": "4", "price": 105 },
-    { "name": "Renaissance", "rate": "4", "price": 125 },
-    { "name": "Crowne Plaza", "rate": "4", "price": 98 },
-    { "name": "Hampton Inn", "rate": "3", "price": 75 },
-    { "name": "Fairfield Inn", "rate": "3", "price": 70 },
-    { "name": "Courtyard", "rate": "3", "price": 85 }
+    { "id": "10", "name": "Four Seasons", "rate": "5", "price": 200 },
+    { "id": "11", "name": "Westin", "rate": "4", "price": 130 },
+    { "id": "12", "name": "DoubleTree", "rate": "4", "price": 90 },
+    { "id": "13", "name": "Embassy Suites", "rate": "4", "price": 105 },
+    { "id": "14", "name": "Renaissance", "rate": "4", "price": 125 },
+    { "id": "15", "name": "Crowne Plaza", "rate": "4", "price": 98 },
+    { "id": "16", "name": "Hampton Inn", "rate": "3", "price": 75 },
+    { "id": "17", "name": "Fairfield Inn", "rate": "3", "price": 70 },
+    { "id": "18", "name": "Courtyard", "rate": "3", "price": 85 }
   ],
   "offers": [
     { "id": "1", "name": "7 day stay + plane", "price": "500" },

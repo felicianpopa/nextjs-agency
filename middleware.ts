@@ -42,6 +42,12 @@ export default clerkMiddleware(async (auth, req) => {
   const { userId, redirectToSignIn } = await auth();
   const { pathname } = req.nextUrl;
 
+  // Skip locale handling for API routes
+  if (pathname.startsWith("/api/")) {
+    // Only handle protected API routes if needed
+    return;
+  }
+
   // Handle locale redirects first
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -65,8 +71,8 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    "/((?!_next).*)",
+    // Skip all internal paths (_next) and API routes
+    "/((?!_next|api).*)",
     // Optional: only run on root (/) URL
     // '/'
   ],

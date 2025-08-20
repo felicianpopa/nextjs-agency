@@ -28,12 +28,13 @@ export default function CardComponent({
   details, // Array of objects with label and value properties
   dictionary, // Translation object for different languages
   altText = "Card image", // Fallback text for screen readers (accessibility)
+  footerSlot,
 }) {
   return (
     // MAIN CARD CONTAINER
-    <div className="p-2 mb-2 border-2 rounded-lg">
+    <div className="p-2 mb-2 border-2 rounded-lg card">
       {/* IMAGE SECTION - Shows either the actual image or a placeholder */}
-      <div className="mb-3">
+      <div className="mb-3 card__header">
         {/* Check if an image URL was provided */}
         {image ? (
           // DISPLAY ACTUAL IMAGE
@@ -55,22 +56,25 @@ export default function CardComponent({
         )}
       </div>
 
-      {/* DETAILS SECTION - Shows all the information about the item */}
-      {/* Loop through each detail item and display it */}
-      {details.map((detail, detailIndex) => (
-        // Each detail is displayed as a paragraph
-        <p key={detailIndex}>
-          {/* 
+      <div className="card__body">
+        {/* DETAILS SECTION - Shows all the information about the item */}
+        {/* Loop through each detail item and display it */}
+        {details.map((detail, detailIndex) => (
+          // Each detail is displayed as a paragraph
+          <p key={detailIndex}>
+            {/* 
             LABEL (Bold text): 
             - First tries to find translation in dictionary
             - Falls back to original label if no translation found
             - Makes it bold with <strong> tag
           */}
-          <strong>{dictionary?.[detail.label] || detail.label}:</strong>
-          {/* VALUE: The actual information to display */}
-          {detail.value}
-        </p>
-      ))}
+            <strong>{dictionary?.[detail.label] || detail.label}:</strong>
+            {/* VALUE: The actual information to display */}
+            {detail.value}
+          </p>
+        ))}
+      </div>
+      <div className="card__footer">{footerSlot}</div>
     </div>
   );
 }
