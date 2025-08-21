@@ -65,7 +65,7 @@ export default function FavouritesList({ dict }: FavouritesListProps) {
       <h2>{listStatus}</h2>
 
       {favList.length > 0 && (
-        <ul className="grid grid-cols-3 grid-rows-3 gap-4">
+        <ul className="grid grid-cols-3 gap-4">
           {favList.map((hotel: MappedHotel, index: number) => {
             const hotelName =
               (hotel.details.find((d) => d.label === "name")

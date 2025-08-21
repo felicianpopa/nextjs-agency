@@ -88,7 +88,7 @@ export default function HotelsList({ dict, initialHotels }: HotelsListProps) {
 
       {allHotels && (
         <>
-          <ul className="grid grid-cols-3 grid-rows-3 gap-4">
+          <ul className="grid grid-cols-3 gap-4">
             {allHotels.map((hotel: MappedHotel, index: number) => {
               const hotelName =
                 (hotel.details.find((d) => d.label === "name")
