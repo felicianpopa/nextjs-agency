@@ -3,7 +3,8 @@
     "homepage": "Homepage",
     "offers": "Offers",
     "hotels": "Hotels",
-    "profile": "Profile"
+    "profile": "Profile",
+    "favourites": "Favourites"
   },
   "pages": {
     "homepage": {

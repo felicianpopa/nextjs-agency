@@ -15,5 +15,10 @@
     "key": "profile",
     "path": "profile",
     "needsAuth": "true"
+  },
+  {
+    "key": "favourites",
+    "path": "favourites",
+    "needsAuth": "true"
   }
 ]

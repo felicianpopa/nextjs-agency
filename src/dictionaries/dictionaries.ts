@@ -7,6 +7,7 @@ export interface Dictionary {
     offers: string;
     hotels: string;
     profile: string;
+    favourites: string;
   };
   pages: {
     homepage: {
