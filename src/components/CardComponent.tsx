@@ -3,18 +3,37 @@ HOW TO USE THIS COMPONENT:
 1. Import it: import CardComponent from './path/to/CardComponent'
 2. Use it with props:
    <CardComponent 
-     image="/path/to/image.jpg"
+     image="/path/to/image.jpg" // Optional
      details={[
        {label: "name", value: "Hotel Name"},
        {label: "price", value: "$100/night"}
      ]}
      dictionary={{name: "Name", price: "Price"}}
-     altText="Hotel image"
+     altText="Hotel image" // Optional
+     footerSlot={<SomeComponent />} // Optional
+   />
+   
+   // Minimal usage (only required props):
+   <CardComponent 
+     details={[{label: "name", value: "Hotel Name"}]}
+     dictionary={{name: "Name"}}
    />
 */
 
 // Import the Next.js Image component for optimized image display
 import Image from "next/image";
+import React from "react";
+
+export interface CardComponentProps {
+  image?: string | null; // Optional - The image URL to display (can be null/undefined)
+  details: Array<{
+    label: string;
+    value: string | number;
+  }>; // Required - Array of objects with label and value properties
+  dictionary: Record<string, string>; // Required - Translation object for different languages
+  altText?: string; // Optional - Fallback text for screen readers (accessibility)
+  footerSlot?: React.ReactNode; // Optional - Footer content to display at the bottom of the card
+}
 
 /**
  * CardComponent - A reusable card that displays an image and details
@@ -29,7 +48,7 @@ export default function CardComponent({
   dictionary, // Translation object for different languages
   altText = "Card image", // Fallback text for screen readers (accessibility)
   footerSlot,
-}) {
+}: CardComponentProps) {
   return (
     // MAIN CARD CONTAINER
     <div className="p-2 mb-2 border-2 rounded-lg card">
@@ -74,7 +93,7 @@ export default function CardComponent({
           </p>
         ))}
       </div>
-      <div className="card__footer">{footerSlot}</div>
+      {footerSlot && <div className="card__footer">{footerSlot}</div>}
     </div>
   );
 }
