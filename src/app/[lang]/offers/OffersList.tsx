@@ -45,7 +45,7 @@ export default function OffersList({ dict, initialOffers }: OffersListProps) {
 
       {allOffers && (
         <>
-          <ul className="grid grid-cols-2 grid-rows-2 gap-4">
+          <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {allOffers.map((offer: MappedOffer, index: number) => {
               const offerName =
                 (offer.details.find((d) => d.label === "name")
